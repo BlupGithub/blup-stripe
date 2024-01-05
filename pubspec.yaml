@@ -1,8 +1,8 @@
 name: blup_stripe
 version: 4.11.0
 description: A simple Stripe API wrapper, that is meant to be used on the server.
-homepage: https://github.com/enyo/stripe-dart
-documentation: https://github.com/enyo/stripe-dart/blob/main/README.md
+homepage: https://github.com/BlupGithub/blup-stripe
+documentation: https://github.com/BlupGithub/blup-stripe/blob/main/README.md
 environment:
   sdk: ">=2.12.0 <3.0.0"
 dependencies:
