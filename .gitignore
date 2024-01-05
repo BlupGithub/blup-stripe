@@ -1,0 +1,13 @@
+pubspec.lock
+packages
+.idea
+.pub
+.buildlog
+
+# IDE/editor files
+*.swp
+*.swo
+
+.DS_Store
+.dart_tool/
+.packages
