@@ -8,6 +8,8 @@ enum PaymentMethodType {
   afterpay_clearpay,
   alipay,
   // ignore: constant_identifier_names
+  amazon_pay,
+  // ignore: constant_identifier_names
   au_becs_debit,
   // ignore: constant_identifier_names
   bacs_debit,
@@ -50,16 +52,18 @@ class CheckoutSession extends Message {
   final String? customer;
   final String? paymentIntent;
   final List<PaymentMethodType> paymentMethodTypes;
-  final String? paymentPageURL;
+  final String? status;
+  final String? url;
 
   CheckoutSession({
     required this.object,
     required this.id,
-    this.paymentPageURL,
     required this.paymentMethodTypes,
     this.clientReferenceId,
     this.customer,
     this.paymentIntent,
+    this.status,
+    this.url,
   });
 
   factory CheckoutSession.fromJson(Map<String, dynamic> json) =>

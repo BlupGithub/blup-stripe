@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:blup_stripe/src/exceptions.dart';
 
 const _defaultUrl = 'https://api.stripe.com/v1/';
-const _defaultVersion = '2023-10-16';
+const _defaultVersion = '2020-08-27';
 
 /// The http client implementation that will make requests to the stripe API.
 ///
@@ -54,12 +54,11 @@ class Client {
     final String? idempotencyKey,
   }) async {
     try {
-      final response = await dio.post<Map<String, dynamic>>(
-          path,
+      final response = await dio.post<Map<String, dynamic>>(path,
           data: data,
           options: _createRequestOptions(idempotencyKey: idempotencyKey));
       return processResponse(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       var message = e.message ?? '';
       if (e.response?.data != null) {
         message += '${e.response!.data}';
@@ -68,30 +67,25 @@ class Client {
     }
   }
 
-  /// Makes a delete request to the Stripe API  (BLUP - Custom Made)
+  /// Makes a DELETE request to the Stripe API
   Future<Map<String, dynamic>> delete(
-      final String path, {
-        final String? idempotencyKey,
-        Map<String, dynamic>? queryParameters,
-      }) async {
+    final String path, {
+    final Map<String, dynamic>? data,
+    final String? idempotencyKey,
+  }) async {
     try {
-      final response = await dio.delete<Map<String, dynamic>>(
-        path,
-        options: _createRequestOptions(idempotencyKey: idempotencyKey),
-        queryParameters: queryParameters
-      );
-      print("response gained with $response");
+      final response = await dio.delete<Map<String, dynamic>>(path,
+          data: data,
+          options: _createRequestOptions(idempotencyKey: idempotencyKey));
       return processResponse(response);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       var message = e.message ?? '';
       if (e.response?.data != null) {
         message += '${e.response!.data}';
       }
-      throw InvalidRequestException("new error $message");
+      throw InvalidRequestException(message);
     }
   }
-
-
 
   /// Makes a get request to the Stripe API
   Future<Map<String, dynamic>> get(
